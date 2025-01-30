@@ -58,19 +58,27 @@
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
-			<version>5.8.2</version>
+			<version>5.10.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
-			<version>5.8.2</version>
+			<version>5.10.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Mockito -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>5.5.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<version>3.7.7</version>
+			<artifactId>mockito-junit-jupiter</artifactId>
+			<version>5.5.0</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -96,7 +104,15 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.2</version>
+				<version>3.1.2</version> <!-- Versão mais recente do Surefire Plugin -->
+				<configuration>
+					<useTestNG>false</useTestNG>
+					<forkCount>1</forkCount> <!-- Número de forks para execução de testes -->
+					<reuseForks>false</reuseForks> <!-- Desabilita reutilização de forks, se necessário -->
+					<includes>
+						<include>**/*Test.java</include> <!-- Garante que apenas classes de teste sejam executadas -->
+					</includes>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
