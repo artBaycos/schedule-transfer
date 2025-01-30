@@ -1,6 +1,7 @@
 package com.teste.schedule.controller;
 
 import com.teste.schedule.dto.TransferDto;
+import com.teste.schedule.service.ScheduleTransferService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -12,14 +13,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 @RequestMapping("/v1/transfer")
 public class ScheduleTransferController {
 
+    @Autowired
+    private ScheduleTransferService transferService;
+
     @PostMapping
     public ResponseEntity<?> scheduleTransfer(@RequestBody TransferDto transferFile) {
         System.out.println(transferFile.toString());
-        return new ResponseEntity<>(transferFile, HttpStatusCode.valueOf(200));
+        transferService.scheduleTransfer(transferFile);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping
     public ResponseEntity<Object> listTransfer() {
-        return new ResponseEntity<>(HttpStatusCode.valueOf(200));
+        return ResponseEntity.ok(transferService.returnAllScheduledTransfers());
     }
 }
