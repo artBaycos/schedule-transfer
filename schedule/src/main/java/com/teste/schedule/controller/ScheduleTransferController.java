@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 @RestController
 @RequestMapping("/v1/transfer")
 public class ScheduleTransferController {
@@ -19,12 +20,22 @@ public class ScheduleTransferController {
     @PostMapping
     public ResponseEntity<?> scheduleTransfer(@RequestBody TransferDto transferFile) {
         System.out.println(transferFile.toString());
-        transferService.scheduleTransfer(transferFile);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        try {
+            transferService.scheduleTransfer(transferFile);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        }catch (Exception e) {
+            System.out.println(e);
+            return new ResponseEntity<>("Erro ao processar a transferência", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping
     public ResponseEntity<Object> listTransfer() {
-        return ResponseEntity.ok(transferService.returnAllScheduledTransfers());
+        try {
+            return ResponseEntity.ok(transferService.returnAllScheduledTransfers());
+        }catch (Exception e) {
+            System.out.println(e);
+            return new ResponseEntity<>("Erro ao processar a listagem de transferencia", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
