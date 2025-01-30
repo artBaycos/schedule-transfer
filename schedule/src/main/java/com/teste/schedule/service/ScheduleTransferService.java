@@ -23,7 +23,8 @@ public class ScheduleTransferService {
             "0-0", value -> value.multiply(new BigDecimal(0.025)),  // 2,5%
             "1-10", value -> BigDecimal.ZERO,  // 0%
             "11-20", value -> value.multiply(new BigDecimal(0.082)), // 8,2%
-            "31-40", value -> value.multiply(new BigDecimal(0.069)), // 6,9%
+            "21-30", value -> value.multiply(new BigDecimal(0.069)), // 6,9%
+            "31-40", value -> value.multiply(new BigDecimal(0.047)), // 4,7%
             "41-50", value -> value.multiply(new BigDecimal(0.017))  // 1,7%
     );
 
